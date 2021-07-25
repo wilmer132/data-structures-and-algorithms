@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-  Node myNode("First node!");
-  cout << myNode.value << endl;
+  Node myNode("My name is Node1");
+  cout << myNode << endl;
   return 1;
 }
