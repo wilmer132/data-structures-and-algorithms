@@ -21,10 +21,16 @@ void HashTable::Add(int data) {
   TableArray[index].AddToTail(data, int_hash(data));
 }
 
-void HashTable::Remove(int data) {
+bool HashTable::Remove(int data) {
   if (LENGTH <= 0) {
     throw("HashTable is size 0. Re-construct instance with nonzero size");
   }
   unsigned int index = int_hash(data) % LENGTH;
-  TableArray[index].GetHead();
+  Node<int>* currentNode = TableArray[index].GetHeadNode();
+  while (currentNode != nullptr) {
+    if (currentNode->nodeHash == int_hash(data)) {
+      return true;
+    }
+    currentNode = currentNode->next;
+  }
 }
