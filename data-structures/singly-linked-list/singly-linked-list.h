@@ -11,16 +11,18 @@ class SinglyLinkedList {
   friend std::ostream& operator<<(std::ostream& os, SinglyLinkedList InstanceLinkedList);
   public:
     SinglyLinkedList();
-    SinglyLinkedList(Node<int> HeadNode);
+    SinglyLinkedList(int value);
     unsigned int Length();
-    void AddToTail(Node<int> DataNode);
-    Node<int>* GetHead();
-    Node<int>* GetTail();
-    Node<int> RemoveLastTail();
+    void AddToTail(int data);
+    int GetHead();
+    int GetTail();
+    int RemoveLastTail();
 
   private:
     unsigned int LENGTH;
     Node<int>* Head;
 
     Node<int>* GetSecondToLastNode();
+    Node<int>* GetHeadNode();
+    Node<int>* GetTailNode();
 };

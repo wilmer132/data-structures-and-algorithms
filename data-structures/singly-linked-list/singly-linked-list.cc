@@ -19,6 +19,28 @@ Node<int>* SinglyLinkedList::GetSecondToLastNode() {
   return SecondToLastNode;
 }
 
+/*
+  Retrieves head node
+*/
+Node<int>* SinglyLinkedList::GetHeadNode() {
+  return Head;
+}
+
+/*
+  Retrieves last node of linked list instance object.
+*/
+
+Node<int>* SinglyLinkedList::GetTailNode() {
+  if (LENGTH <= 0) {
+    return nullptr;
+  } else if (LENGTH == 1) {
+    return Head;
+  } else {
+    Node<int>* TailNode = GetSecondToLastNode()->next;
+    return TailNode;
+  }
+}
+
 /*Public Methods*/
 
 /*
@@ -34,9 +56,9 @@ SinglyLinkedList::SinglyLinkedList() {
   Uses heap memory to allocate space for new data.
 */
 
-SinglyLinkedList::SinglyLinkedList(Node<int> HeadNode) {
+SinglyLinkedList::SinglyLinkedList(int value) {
   LENGTH = 1;
-  Head = new Node<int>(HeadNode.value);
+  Head = new Node<int>(value);
 }
 
 /*
@@ -50,34 +72,27 @@ unsigned int SinglyLinkedList::Length() {
   Retrieve head of instance object.
 */
 
-Node<int>* SinglyLinkedList::GetHead() {
-  return Head;
+int SinglyLinkedList::GetHead() {
+  return Head->value;
 }
 
 /*
   Retrieves last node of linked list instance object.
 */
 
-Node<int>* SinglyLinkedList::GetTail() {
-  if (LENGTH <= 0) {
-    return nullptr;
-  } else if (LENGTH == 1) {
-    return Head;
-  } else {
-    Node<int>* TailNode = GetSecondToLastNode()->next;
-    return TailNode;
-  }
+int SinglyLinkedList::GetTail() {
+  return GetTailNode()->value;
 }
 
 /*
   Iterates over instance object and adds new node to tail, defining new tail.
 */
-void SinglyLinkedList::AddToTail(Node<int> DataNode) {
+void SinglyLinkedList::AddToTail(int data) {
   if (Head == nullptr) {
-    Head = new Node<int>(DataNode.value);
+    Head = new Node<int>(data);
   } else {
-    Node<int>* TailNode = GetTail();
-    TailNode->next = new Node<int>(DataNode.value);
+    Node<int>* TailNode = GetTailNode();
+    TailNode->next = new Node<int>(data);
   }
   LENGTH++;
 }
@@ -86,7 +101,7 @@ void SinglyLinkedList::AddToTail(Node<int> DataNode) {
   Iterates over instance object, retrieves and removes last tail, returning 
   heap memory.
 */
-Node<int> SinglyLinkedList::RemoveLastTail() {
+int SinglyLinkedList::RemoveLastTail() {
   if (LENGTH <= 0) {
     throw("Cannot remove Node from empty singly linked list.");
   } else if (LENGTH == 1) {
@@ -94,7 +109,7 @@ Node<int> SinglyLinkedList::RemoveLastTail() {
     Node<int> TailCopy = *Head;
     delete Head;
     Head = nullptr;
-    return TailCopy;
+    return TailCopy.value;
   } else {
     LENGTH--;
     Node<int>* SecondToLastNode = GetSecondToLastNode();
@@ -102,7 +117,7 @@ Node<int> SinglyLinkedList::RemoveLastTail() {
     Node<int> LastNodeCopy = *LastNode;
     delete LastNode;
     SecondToLastNode->next = nullptr;
-    return LastNodeCopy;
+    return LastNodeCopy.value;
   }
 }
 
@@ -110,7 +125,7 @@ Node<int> SinglyLinkedList::RemoveLastTail() {
   Define custom printing of instance data structure
 */
 std::ostream& operator<<(std::ostream& os, SinglyLinkedList InstanceLinkedList) {
-  Node<int>* CurrentNode = InstanceLinkedList.GetHead();
+  Node<int>* CurrentNode = InstanceLinkedList.GetHeadNode();
   unsigned int itr = 0;
   os << "{";
   while (CurrentNode != nullptr) {
