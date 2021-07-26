@@ -14,6 +14,8 @@ class SinglyLinkedList {
     SinglyLinkedList(int value);
     unsigned int Length();
     void AddToTail(int data, int hashCode = -1);
+    Node<int>* GetHeadNode();
+    Node<int>* GetTailNode();
     int GetHead();
     int GetTail();
     int RemoveLastTail();
@@ -23,6 +25,4 @@ class SinglyLinkedList {
     Node<int>* Head;
 
     Node<int>* GetSecondToLastNode();
-    Node<int>* GetHeadNode();
-    Node<int>* GetTailNode();
 };
