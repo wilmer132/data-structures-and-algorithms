@@ -13,7 +13,8 @@ class Node {
   public:
     Node* next;
     NodeData value;
+    int nodeHash;
 
     Node();
-    Node(NodeData data);
+    Node(NodeData data, int dataHash = -1);
 };
