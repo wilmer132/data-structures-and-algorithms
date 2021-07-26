@@ -3,7 +3,6 @@
   Details: Definition of hash-table class.
  */
 #include <vector>
-#include <string>
 #include "../singly-linked-list/singly-linked-list.h"
 
 #pragma once
@@ -11,10 +10,10 @@
    public:
     HashTable();
     HashTable(unsigned int tableLength);
-    void Add(std::string data);
+    void Add(int data);
 
    private:
     unsigned int LENGTH;
     std::vector<SinglyLinkedList> TableArray;
-    std::hash<std::string> string_hash;
+    std::hash<int> int_hash;
  };

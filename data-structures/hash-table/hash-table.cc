@@ -13,10 +13,10 @@ HashTable::HashTable(unsigned int tableLength) {
   TableArray.resize(tableLength);
 }
 
-void HashTable::Add(std::string data) {
+void HashTable::Add(int data) {
   if (LENGTH <= 0) {
     throw("HashTable is size 0. Re-construct instance with nonzero size");
   }
-  unsigned int index = string_hash(data) % LENGTH;
-  
+  unsigned int index = int_hash(data) % LENGTH;
+  TableArray[index].AddToTail(data);
 }
