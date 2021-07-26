@@ -6,44 +6,41 @@
 #include <list>
 #include "../node/node.h"
 #include "singly-linked-list.h"
-using namespace std;
 
 int main() {
-  cout << "Testing construction of SinglyLinkedList:\n" << endl;
+  std::cout << "Testing construction of SinglyLinkedList:\n" << std::endl;
   SinglyLinkedList FirstSinglyLinkedList = SinglyLinkedList();
-  Node<int> Message = Node<int>(100);
-  SinglyLinkedList SecondSinglyLinkedList = SinglyLinkedList(Message);
-  cout << "First instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << endl;
-  cout << "Second instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << endl;
+  SinglyLinkedList SecondSinglyLinkedList = SinglyLinkedList(100);
+  std::cout << "First instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << std::endl;
+  std::cout << "Second instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << std::endl;
 
-  cout << "\nTesting SinglyLinkedList value addition:\n" << endl;
-  FirstSinglyLinkedList.AddToTail(Node<int>(1000));
-  SecondSinglyLinkedList.AddToTail(Node<int>(2000));
-  Node<int> MessageList[] = {Node<int>(200), Node<int>(300), Node<int>(400), Node<int>(500)};
+  std::cout << "\nTesting SinglyLinkedList value addition:\n" << std::endl;
+  FirstSinglyLinkedList.AddToTail(1000);
+  SecondSinglyLinkedList.AddToTail(2000);
+  int MessageList[] = {200, 300, 400, 500};
   for (int i = 0; i < 4; i++) {
-    Node<int> SingleMessage = MessageList[i];
-    SecondSinglyLinkedList.AddToTail(SingleMessage);
+    SecondSinglyLinkedList.AddToTail(MessageList[i]);
   }
-  cout << "Updated first instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << endl; 
-  cout << "Updated instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << endl;
+  std::cout << "Updated first instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << std::endl; 
+  std::cout << "Updated instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << std::endl;
 
-  cout << "\nTesting SinglyLinkedList value removal:\n" << endl;
+  std::cout << "\nTesting SinglyLinkedList value removal:\n" << std::endl;
   while (FirstSinglyLinkedList.Length() >= 0) {
     try {
-      cout << "First instance value: " << FirstSinglyLinkedList.RemoveLastTail() << ". Size is now " 
-      << FirstSinglyLinkedList.Length() << endl;
+      std::cout << "First instance value: " << FirstSinglyLinkedList.RemoveLastTail() << ". Size is now " 
+      << FirstSinglyLinkedList.Length() << std::endl;
     } catch(char const* errorMessage) {
-      cout << errorMessage << endl;
+      std::cout << errorMessage << std::endl;
       break;
     }
   }
-  cout << endl;
+  std::cout << std::endl;
   while (SecondSinglyLinkedList.Length() >= 0) {
     try {
-      cout << "Second instance value: " << SecondSinglyLinkedList.RemoveLastTail() << ". Size is now " 
-      << SecondSinglyLinkedList.Length() << endl;
+      std::cout << "Second instance value: " << SecondSinglyLinkedList.RemoveLastTail() << ". Size is now " 
+      << SecondSinglyLinkedList.Length() << std::endl;
     } catch(char const* errorMessage) {
-      cout << errorMessage << endl;
+      std::cout << errorMessage << std::endl;
       break;
     }
   }
