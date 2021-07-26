@@ -87,12 +87,12 @@ int SinglyLinkedList::GetTail() {
 /*
   Iterates over instance object and adds new node to tail, defining new tail.
 */
-void SinglyLinkedList::AddToTail(int data) {
+void SinglyLinkedList::AddToTail(int data, int hashCode) {
   if (Head == nullptr) {
-    Head = new Node<int>(data);
+    Head = new Node<int>(data, hashCode);
   } else {
     Node<int>* TailNode = GetTailNode();
-    TailNode->next = new Node<int>(data);
+    TailNode->next = new Node<int>(data, hashCode);
   }
   LENGTH++;
 }
