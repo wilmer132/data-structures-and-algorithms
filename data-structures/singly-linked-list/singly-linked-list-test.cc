@@ -11,17 +11,17 @@ using namespace std;
 int main() {
   cout << "Testing construction of SinglyLinkedList:\n" << endl;
   SinglyLinkedList FirstSinglyLinkedList = SinglyLinkedList();
-  Node Message = Node("Woohoo");
+  Node<int> Message = Node<int>(100);
   SinglyLinkedList SecondSinglyLinkedList = SinglyLinkedList(Message);
   cout << "First instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << endl;
   cout << "Second instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << endl;
 
   cout << "\nTesting SinglyLinkedList value addition:\n" << endl;
-  FirstSinglyLinkedList.AddToTail(Node("Hola"));
-  SecondSinglyLinkedList.AddToTail(Node("Hola"));
-  Node MessageList[] = {Node("Great"), Node("Awesome"), Node("Amazing"), Node("Incredible")};
+  FirstSinglyLinkedList.AddToTail(Node<int>(1000));
+  SecondSinglyLinkedList.AddToTail(Node<int>(2000));
+  Node<int> MessageList[] = {Node<int>(200), Node<int>(300), Node<int>(400), Node<int>(500)};
   for (int i = 0; i < 4; i++) {
-    Node SingleMessage = MessageList[i];
+    Node<int> SingleMessage = MessageList[i];
     SecondSinglyLinkedList.AddToTail(SingleMessage);
   }
   cout << "Updated first instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << endl; 

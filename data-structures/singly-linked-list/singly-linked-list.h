@@ -1,6 +1,6 @@
 /*
   File: linked-list.h
-  Details: Definition of singly linked list class.
+  Details: Definition of singly linked list class. Class only for int
  */
 #include <iostream>
 #include "../node/node.h"
@@ -11,16 +11,16 @@ class SinglyLinkedList {
   friend std::ostream& operator<<(std::ostream& os, SinglyLinkedList InstanceLinkedList);
   public:
     SinglyLinkedList();
-    SinglyLinkedList(Node HeadNode);
+    SinglyLinkedList(Node<int> HeadNode);
     unsigned int Length();
-    void AddToTail(Node DataNode);
-    Node* GetHead();
-    Node* GetTail();
-    Node RemoveLastTail();
-    
+    void AddToTail(Node<int> DataNode);
+    Node<int>* GetHead();
+    Node<int>* GetTail();
+    Node<int> RemoveLastTail();
+
   private:
     unsigned int LENGTH;
-    Node* Head;
+    Node<int>* Head;
 
-    Node* GetSecondToLastNode();
+    Node<int>* GetSecondToLastNode();
 };
