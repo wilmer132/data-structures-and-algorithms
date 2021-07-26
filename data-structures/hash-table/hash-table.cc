@@ -20,3 +20,7 @@ void HashTable::Add(int data) {
   unsigned int index = int_hash(data) % LENGTH;
   TableArray[index].AddToTail(data);
 }
+
+void HashTable::Remove(int data) {
+  
+}

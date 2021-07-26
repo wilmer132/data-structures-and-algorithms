@@ -11,6 +11,7 @@
     HashTable();
     HashTable(unsigned int tableLength);
     void Add(int data);
+    void Remove(int data);
 
    private:
     unsigned int LENGTH;
