@@ -18,9 +18,13 @@ void HashTable::Add(int data) {
     throw("HashTable is size 0. Re-construct instance with nonzero size");
   }
   unsigned int index = int_hash(data) % LENGTH;
-  TableArray[index].AddToTail(data);
+  TableArray[index].AddToTail(data, int_hash(data));
 }
 
 void HashTable::Remove(int data) {
-  
+  if (LENGTH <= 0) {
+    throw("HashTable is size 0. Re-construct instance with nonzero size");
+  }
+  unsigned int index = int_hash(data) % LENGTH;
+  TableArray[index].GetHead();
 }
