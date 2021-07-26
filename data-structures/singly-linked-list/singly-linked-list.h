@@ -13,7 +13,7 @@ class SinglyLinkedList {
     SinglyLinkedList();
     SinglyLinkedList(int value);
     unsigned int Length();
-    void AddToTail(int data);
+    void AddToTail(int data, int hashCode = -1);
     int GetHead();
     int GetTail();
     int RemoveLastTail();
