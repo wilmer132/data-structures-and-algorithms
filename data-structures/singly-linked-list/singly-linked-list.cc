@@ -5,8 +5,6 @@
 #include "../node/node.h"
 #include "singly-linked-list.h"
 
-/*Private Methods*/
-
 /*
   Retrieves second to last node of linked list instance object.
 */
@@ -40,8 +38,6 @@ Node<int>* SinglyLinkedList::GetTailNode() {
     return TailNode;
   }
 }
-
-/*Public Methods*/
 
 /*
   Default constructor will have zero length and nullptr head.
