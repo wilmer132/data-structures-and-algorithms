@@ -1,3 +1,4 @@
-.o
-.exec
-.vscode
+*.o
+*.exec
+*.exe
+*.vscode

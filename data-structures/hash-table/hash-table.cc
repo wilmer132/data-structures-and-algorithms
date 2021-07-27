@@ -3,6 +3,7 @@
   Details: Implementation of hash-table class.
  */
 #include "hash-table.h"
+#include <iostream>
 
 HashTable::HashTable() {
   LENGTH = 0;
@@ -26,14 +27,17 @@ void HashTable::Add(int data) {
     throw("HashTable is size 0. Re-construct instance with nonzero size");
   }
   unsigned int index = int_hash(data) % LENGTH;
-  Node<int>* CurrentNode = TableArray[index].GetHeadNode();
-  Node<int> DataNode = Node<int>(data, int_hash(data));
-  while (CurrentNode != nullptr) {
-    if (CurrentNode->value == DataNode.value) {
-      throw("Cannot add duplicate values due to hashing complexity. Only unique values can be added");
-      return;
+  if (TableArray[index].Length() > 0) {
+    Node<int>* CurrentNode = TableArray[index].GetHeadNode();
+    Node<int> DataNode = Node<int>(data, int_hash(data));
+    while (CurrentNode != nullptr) {
+      if (*CurrentNode == DataNode) {
+        std::cout << "Detected duplicate!!!!" << std::endl;
+        throw("Cannot add duplicate values due to hashing complexity. Only unique values can be added");
+        return;
+      }
+      CurrentNode = CurrentNode->next;
     }
-    CurrentNode = CurrentNode->next;
   }
   TableArray[index].AddToTail(data, int_hash(data));
 }
@@ -51,6 +55,7 @@ bool HashTable::Remove(int data) {
     }
     currentNode = currentNode->next;
   }
+  throw("Item could not be found.");
   return false;
 }
 
