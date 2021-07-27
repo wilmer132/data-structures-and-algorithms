@@ -39,6 +39,35 @@ Node<int>* SinglyLinkedList::GetTailNode() {
   }
 }
 
+/*Remove and return provided parameter node from linked list*/
+void SinglyLinkedList::RemoveNode(Node<int>* DataNode) {
+  if (DataNode == Head) {
+    if (LENGTH == 1) {
+      RemoveLastTail();
+      return;
+    }
+    Head = Head->next;
+    DataNode->next = nullptr;
+    delete DataNode;
+    return;
+  }
+  Node<int>* CurrentNode = Head;
+  while (CurrentNode != nullptr) {
+    if (CurrentNode->next == DataNode) {
+      if (CurrentNode->next->next != nullptr) {
+        CurrentNode->next = CurrentNode->next->next;
+      } else {
+        CurrentNode->next = nullptr;
+      }
+      DataNode->next = nullptr;
+      delete DataNode;
+      return;
+    }
+    CurrentNode = CurrentNode->next;
+  }
+  throw("Node provided not in SinglyLinkedList.");
+}
+
 /*
   Default constructor will have zero length and nullptr head.
 */
