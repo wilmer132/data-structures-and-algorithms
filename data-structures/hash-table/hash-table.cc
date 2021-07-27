@@ -27,10 +27,11 @@ void HashTable::Add(int data) {
   }
   unsigned int index = int_hash(data) % LENGTH;
   Node<int>* CurrentNode = TableArray[index].GetHeadNode();
-  Node<int> DataNode = Node<int>(data);
+  Node<int> DataNode = Node<int>(data, int_hash(data));
   while (CurrentNode != nullptr) {
-    if (*CurrentNode == DataNode) {
-      
+    if (CurrentNode->value == DataNode.value) {
+      throw("Cannot add duplicate values due to hashing complexity. Only unique values can be added");
+      return;
     }
     CurrentNode = CurrentNode->next;
   }
