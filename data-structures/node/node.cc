@@ -28,11 +28,11 @@ std::ostream& operator<<(std::ostream& os, Node<int> DataNode) {
 }
 
 bool operator==(const Node<std::string>& lNode, const Node<std::string>& rNode) {
-  return ((lNode.next == rNode.next) && (lNode.value == rNode.value) && (lNode.nodeHash == rNode.nodeHash));
+  return ((lNode.value == rNode.value) && (lNode.nodeHash == rNode.nodeHash));
 }
 
 bool operator==(const Node<int>& lNode, const Node<int>& rNode) {
-  return ((lNode.next == rNode.next) && (lNode.value == rNode.value) && (lNode.nodeHash == rNode.nodeHash));
+  return ((lNode.value == rNode.value) && (lNode.nodeHash == rNode.nodeHash));
 }
 
 template class Node<std::string>;
