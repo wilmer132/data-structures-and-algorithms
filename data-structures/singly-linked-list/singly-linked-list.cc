@@ -49,6 +49,7 @@ void SinglyLinkedList::RemoveNode(Node<int>* DataNode) {
     Head = Head->next;
     DataNode->next = nullptr;
     delete DataNode;
+    LENGTH--;
     return;
   }
   Node<int>* CurrentNode = Head;
@@ -61,6 +62,7 @@ void SinglyLinkedList::RemoveNode(Node<int>* DataNode) {
       }
       DataNode->next = nullptr;
       delete DataNode;
+      LENGTH--;
       return;
     }
     CurrentNode = CurrentNode->next;
