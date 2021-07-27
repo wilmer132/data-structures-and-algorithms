@@ -24,7 +24,7 @@ int main() {
   std::cout << "Updated first instance is size " << FirstSinglyLinkedList.Length() << ": " << FirstSinglyLinkedList << std::endl; 
   std::cout << "Updated instance is size " << SecondSinglyLinkedList.Length() << ": " << SecondSinglyLinkedList << std::endl;
 
-  std::cout << "\nTesting SinglyLinkedList value removal:\n" << std::endl;
+  std::cout << "\nTesting SinglyLinkedList tail value removal:\n" << std::endl;
   while (FirstSinglyLinkedList.Length() >= 0) {
     try {
       std::cout << "First instance value: " << FirstSinglyLinkedList.RemoveLastTail() << ". Size is now " 
@@ -45,5 +45,30 @@ int main() {
     }
   }
 
+  std::cout << "\nTesting SinglyLinkedList regular value removal:\n" << std::endl;
+  for (int i = 0; i < 4; i++) {
+    SecondSinglyLinkedList.AddToTail(MessageList[i]);
+  }
+  try {
+    std::cout << "\nInitial SinglyLinkedList values:\n" << SecondSinglyLinkedList << std::endl;
+    std::cout << "\nTesting middle value removal:\n" << std::endl;
+    SecondSinglyLinkedList.RemoveNode(SecondSinglyLinkedList.GetHeadNode()->next);
+    std::cout << "\nSinglyLinkedList values now:\n" << SecondSinglyLinkedList << std::endl;
+    std::cout << "\nTesting last value removal:\n" << std::endl;
+    SecondSinglyLinkedList.RemoveNode(SecondSinglyLinkedList.GetTailNode());
+    std::cout << "\nSinglyLinkedList values now:\n" << SecondSinglyLinkedList << std::endl;
+    std::cout << "\nTesting first value removal:\n" << std::endl;
+    SecondSinglyLinkedList.RemoveNode(SecondSinglyLinkedList.GetHeadNode());
+    std::cout << "\nSinglyLinkedList values now:\n" << SecondSinglyLinkedList << std::endl;
+    std::cout << "\nTesting only value removal:\n" << std::endl;
+    SecondSinglyLinkedList.RemoveNode(SecondSinglyLinkedList.GetHeadNode());
+    std::cout << "\nSinglyLinkedList values now:\n" << SecondSinglyLinkedList << std::endl;
+    std::cout << "\nTesting random value removal:\n" << std::endl;
+    Node<int>* RandomNode = new Node<int>(123);
+    SecondSinglyLinkedList.RemoveNode(RandomNode);
+    delete RandomNode;
+  } catch(char const* errorMessage) {
+    std::cout << errorMessage << std::endl;
+  }
   return 1;
 }
