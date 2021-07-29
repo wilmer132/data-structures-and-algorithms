@@ -13,6 +13,7 @@ class Node {
   friend bool operator==(const Node<NodeData>& lNode, const Node<NodeData>& rNode);
   public:
     Node* next;
+    Node* back;
     NodeData value;
     int nodeHash;
 
