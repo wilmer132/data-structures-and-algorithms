@@ -153,6 +153,26 @@ void BinaryTree::InOrderTraversalString(int currentLoc, std::string& currentStri
   InOrderTraversalString(RIGHTCHILD(currentLoc), currentString);
 }
 
+void BinaryTree::PreOrderTraversalString(int currentLoc, std::string& currentString) {
+  int currentIndex = currentLoc - 1;
+  if (currentIndex > LENGTH || BinaryTreeArray[currentIndex] == -1) {
+    return;
+  }
+  currentString += std::to_string(BinaryTreeArray[currentIndex]) + " ";
+  PreOrderTraversalString(LEFTCHILD(currentLoc), currentString);
+  PreOrderTraversalString(RIGHTCHILD(currentLoc), currentString);
+}
+
+void BinaryTree::PostOrderTraversalString(int currentLoc, std::string& currentString) {
+  int currentIndex = currentLoc - 1;
+  if (currentIndex > LENGTH || BinaryTreeArray[currentIndex] == -1) {
+    return;
+  }
+  PostOrderTraversalString(LEFTCHILD(currentLoc), currentString);
+  PostOrderTraversalString(RIGHTCHILD(currentLoc), currentString);
+  currentString += std::to_string(BinaryTreeArray[currentIndex]) + " ";
+}
+
 std::ostream& operator<<(std::ostream& os, BinaryTree BinaryTreeInstance) {
   os << "[";
   std::string BinaryTreeInstanceString = "";

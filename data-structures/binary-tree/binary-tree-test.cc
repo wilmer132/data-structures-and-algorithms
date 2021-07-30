@@ -19,6 +19,17 @@ int main() {
     }
     std::cout << "Binary Tree now: " << MyBinaryTree << std::endl;
 
+    std::cout << "Testing out traversal algorithms..." << std::endl;
+    std::string preOrder = "";
+    std::string inOrder = "";
+    std::string postOrder = "";
+    MyBinaryTree.PreOrderTraversalString(1, preOrder);
+    MyBinaryTree.InOrderTraversalString(1, inOrder);
+    MyBinaryTree.PostOrderTraversalString(1, postOrder);
+    std::cout << "PreOrder Traversal: [" << preOrder << "]" << std::endl;
+    std::cout << "InOrder Traversal: [" << inOrder << "]" << std::endl;
+    std::cout << "PostOrder Traversal: [" << postOrder << "]" << std::endl;
+
     std::cout << "Removing values from Binary Tree..." << std::endl;
     // MyBinaryTree.Remove(10);
     // MyBinaryTree.Remove(7);

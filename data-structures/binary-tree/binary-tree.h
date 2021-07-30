@@ -20,10 +20,9 @@ class BinaryTree {
     BinaryTree(int data);
     void Add(int newData);
     void Remove(int deleteData);
-    void InOrderTraversal();
-    void PreOrderTraversal();
-    void PostOrderTraversal();
     void InOrderTraversalString(int currentLoc, std::string& currentString);
+    void PreOrderTraversalString(int currentLoc, std::string& currentString);
+    void PostOrderTraversalString(int currentLoc, std::string& currentString);
   private:
     int LENGTH;
     int sizeFilled;
