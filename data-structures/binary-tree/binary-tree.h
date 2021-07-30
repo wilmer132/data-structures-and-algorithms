@@ -30,5 +30,8 @@ class BinaryTree {
     
     void AddToLeaf(int ItemLoc, int newData);
     void ResizeArray();
-    // void NodeMatchParent(Node<int>* currentNode, Node<int>*& nodeToLoad, int nodeData);
+    void MatchData(int currentLoc, int& locToLoad, int data);
+    void RightMostItem(int currentLoc, int& locToLoad);
+    void LeftMostItem(int currentLoc, int& locToLoad);
+    void DeleteLoc(int currentLoc);
 };

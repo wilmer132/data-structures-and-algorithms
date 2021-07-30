@@ -2,8 +2,8 @@
   File: binary-tree.cc
   Details: Implementation of binary tree class.
  */
+#include <iostream>
 #include "binary-tree.h"
-#include "../node/node.h"
 
 BinaryTree::BinaryTree() {
   LENGTH = INIT_SIZE;
@@ -60,49 +60,89 @@ void BinaryTree::Add(int newData) {
   sizeFilled++;
 }
 
-// void BinaryTree::NodeMatchParent(Node<int>* currentNode, Node<int>*& nodeToLoad, int nodeData) {
-//   if (currentNode == nullptr) {
-//     throw("Error: Data to delete does not exist in binary tree");
-//   } else if (nodeData == currentNode->value) {
-//     nodeToLoad = currentNode;
+// void BinaryTree::LeftMostItem(int currentLoc, int& locToLoad) {
+//   int leftChildIndex = LEFTCHILD(currentLoc) -1;
+//   if (LEFTCHILD(currentLoc) > LENGTH || BinaryTreeArray[leftChildIndex] == -1) {
+//     locToLoad = BinaryTreeArray[currentLoc];
 //     return;
-//   } else if (nodeData < currentNode->value) {
-//     NodeMatchParent(currentNode->back, nodeToLoad, nodeData);
-//   } else if (nodeData > currentNode->value) {
-//     NodeMatchParent(currentNode->next, nodeToLoad, nodeData);
 //   }
+//   LeftMostItem(LEFTCHILD(currentLoc), locToLoad);
 // }
 
-// void BinaryTree::Remove(int deleteData) {
-//   if (LENGTH == 0) {
-//     throw("Error: Cannot remove data from empty binary tree");
-//   } else if (LENGTH == 1) {
-//     root = nullptr;
-//     LENGTH--;
-//     return;
-//   }
-//   Node<int>* parentOfDeleteNode = new Node<int>();
-//   NodeMatchParent(root, parentOfDeleteNode, deleteData);
-//   Node<int>* nodeToDelete = (parentOfDeleteNode->value < deleteData) ? parentOfDeleteNode->back : parentOfDeleteNode->next;
-//   if (nodeToDelete->back == nullptr && nodeToDelete->next == nullptr) {
-//     if (parentOfDeleteNode->value < deleteData) {
-//       parentOfDeleteNode->back = nullptr;
-//     } else {
-//       parentOfDeleteNode->next = nullptr;
-//     }
-//   } else if ((nodeToDelete->back != nullptr && nodeToDelete->next == nullptr) || 
-//             (nodeToDelete->back == nullptr && nodeToDelete->next != nullptr)) {
-//     if (parentOfDeleteNode->value < deleteData) {
-//       parentOfDeleteNode->back = (nodeToDelete->back != nullptr) ? nodeToDelete->back: nodeToDelete->next;
-//     } else {
-//       parentOfDeleteNode->next = (nodeToDelete->back != nullptr) ? nodeToDelete->back: nodeToDelete->next;
-//     }
-//   } else {
-//     Node<int>* ParentOfPreDecessor = InOrderPreDecessor(nodeToDelete);
-//   }
-//   delete nodeToDelete;
-//   LENGTH--;
-// }
+void BinaryTree::RightMostItem(int currentLoc, int& locToLoad) {
+  int rightChildIndex = RIGHTCHILD(currentLoc) - 1;
+  if (RIGHTCHILD(currentLoc) > LENGTH || BinaryTreeArray[rightChildIndex] == -1) {
+    locToLoad = currentLoc;
+    return;
+  }
+  RightMostItem(RIGHTCHILD(currentLoc), locToLoad);
+}
+
+void BinaryTree::DeleteLoc(int currentLoc) {
+  // std::cout << "Now at number " << BinaryTreeArray[currentLoc - 1] << std::endl;
+  int currentIndex = currentLoc - 1;
+  int leftChildIndex = LEFTCHILD(currentLoc) - 1;
+  int rightChildIndex = RIGHTCHILD(currentLoc) - 1;
+  /*Potential bug, index may be out of bounds*/
+  if ((LEFTCHILD(currentLoc) > LENGTH) || 
+      (BinaryTreeArray[leftChildIndex] == -1 && BinaryTreeArray[rightChildIndex] == -1)) {
+    // std::cout << "Location to delete is either out-of-bounds or no children" << std::endl;
+    BinaryTreeArray[currentIndex] = -1;
+    return;
+  } else if (BinaryTreeArray[leftChildIndex] != -1 && BinaryTreeArray[rightChildIndex] == -1) {
+    // std::cout << "Location has left sub-tree only" << std::endl;
+    BinaryTreeArray[currentIndex] = BinaryTreeArray[leftChildIndex];
+    DeleteLoc(LEFTCHILD(currentLoc));
+  } else if (BinaryTreeArray[leftChildIndex] == -1 && BinaryTreeArray[rightChildIndex] != -1) {
+    // std::cout << "Location has right sub-tree only" << std::endl;
+    BinaryTreeArray[currentIndex] = BinaryTreeArray[rightChildIndex];
+    DeleteLoc(RIGHTCHILD(currentLoc));
+  } else {
+    // std::cout << "Location has both left and right sub-trees" << std::endl;
+    int locToDelete = -1;
+    RightMostItem(LEFTCHILD(currentLoc), locToDelete);
+    // if (locToDelete == -1) {
+    //   LeftMostItem(RIGHTCHILD(currentLoc), locToDelete);
+    // }
+    // std::cout << "Number to delete is: " << BinaryTreeArray[locToDelete - 1] << std::endl;
+    int indexToDelete = locToDelete - 1;
+    BinaryTreeArray[currentIndex] = BinaryTreeArray[indexToDelete];
+    DeleteLoc(locToDelete);
+  }
+}
+
+void BinaryTree::MatchData(int currentLoc, int& locToLoad, int data) {
+  int currentIndex = currentLoc - 1;
+  if (currentLoc > LENGTH || BinaryTreeArray[currentIndex] == -1) {
+    return;
+  }
+  if (data == BinaryTreeArray[currentIndex]) {
+    locToLoad = currentLoc;
+    return;
+  }
+  int nextLoc = (data < BinaryTreeArray[currentIndex]) ? LEFTCHILD(currentLoc) : RIGHTCHILD(currentLoc);
+  MatchData(nextLoc, locToLoad, data);
+}
+
+void BinaryTree::Remove(int deleteData) {
+  if (sizeFilled == 0) {
+    throw("Error: Cannot remove data from empty binary tree");
+  } else if (sizeFilled == 1) {
+    ROOT = -1;
+    sizeFilled--;
+    return;
+  }
+
+  int deleteItemLoc = -1;
+  MatchData(1, deleteItemLoc, deleteData);
+  if (deleteItemLoc == -1) {
+    throw("Error: Data to delete does not exist in binary tree");
+  }
+  // std::cout << "Matched number to delete: " << BinaryTreeArray[deleteItemLoc - 1] << std::endl;
+  DeleteLoc(deleteItemLoc);
+  sizeFilled--;
+}
+
 void BinaryTree::InOrderTraversalString(int currentLoc, std::string& currentString) {
   int currentIndex = currentLoc - 1;
   if (currentIndex > LENGTH || BinaryTreeArray[currentIndex] == -1) {
